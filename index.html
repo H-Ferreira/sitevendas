@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria - Faça seu Pedido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .header {
+            background-color: #512615;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header img {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .header .horario {
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #512615;
+            text-align: center;
+        }
+
+        h2 {
+            color: #512615;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        select, input[type="number"], input[type="text"], textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #512615;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 2%;
+        }
+
+        button img {
+            width: 24px;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #3e1e10;
+        }
+
+        #total {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+            color: #3e1e10;
+            font-family: Arial, sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding-top: 0%;
+            margin-bottom: 5%;
+            padding-top: 2%;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfNFdLkeWelcDA6lLz7gw9PqRryRuVpmKT-g&s" alt="Imagem">
+        <div class="horario">Horário de Funcionamento: Todos os dias, das 17h às 00h</div>
+    </div>
+
+    <div class="container">
+        <h1>Pizzaria Italian</h1>
+        <h2>Faça seu Pedido</h2>
+        <form id="pedidoForm">
+            <label for="nomeCliente">Nome do Cliente:</label>
+            <input type="text" id="nomeCliente" name="nomeCliente" placeholder="Seu nome" required>
+
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" name="cep" placeholder="Digite o CEP" maxlength="8" pattern="\d{8}" inputmode="numeric" required>
+
+            <label for="endereco">Endereço de Entrega:</label>
+            <input type="text" id="endereco" name="endereco" placeholder="Rua, Número, Bairro" required>
+
+            <label for="numero">Número:</label>
+            <input type="text" id="numero" name="numero" placeholder="Número do endereço" required>
+
+            <label for="complemento">Complemento:</label>
+            <input type="text" id="complemento" name="complemento" placeholder="Complemento (opcional)">
+
+            <label for="tamanho">Escolha o tamanho da pizza:</label>
+            <select id="tamanho" name="tamanho">
+                <option value="" disabled selected>Selecionar</option>
+                <option value="Pequena" data-preco="30">Pequena - R$ 30</option>
+                <option value="Média" data-preco="40">Média - R$ 40</option>
+                <option value="Grande" data-preco="50">Grande - R$ 50</option>
+            </select>
+
+            <label for="sabor">Escolha o sabor da pizza:</label>
+            <select id="sabor" name="sabor">
+                <option value="" disabled selected>Selecionar</option>
+                <optgroup label="Pizzas Tradicionais">
+                    <option value="Margarita" data-preco="0">Margarita</option>
+                    <option value="Pepperoni" data-preco="0">Pepperoni</option>
+                    <option value="Frango com Catupiry" data-preco="0">Frango com Catupiry</option>
+                    <option value="Calabresa" data-preco="0">Calabresa</option>
+                </optgroup>
+                <optgroup label="Pizzas Especiais">
+                    <option value="4 Queijos" data-preco="8">4 Queijos - Acréscimo R$ 8</option>
+                    <option value="Carbonara" data-preco="8">Carbonara - Acréscimo R$ 8</option>
+                    <option value="Diavola" data-preco="8">Diavola - Acréscimo R$ 8</option>
+                    <option value="Portuguesa" data-preco="8">Portuguesa - Acréscimo R$ 8</option>
+                </optgroup>
+                <optgroup label="Pizzas Doces">
+                    <option value="Chocolate com Morango" data-preco="10">Chocolate com Morango - Acréscimo R$ 10</option>
+                    <option value="Banana com Canela" data-preco="10">Banana com Canela - Acréscimo R$ 10</option>
+                    <option value="Doce de Leite com Nozes" data-preco="10">Doce de Leite com Nozes - Acréscimo R$ 10</option>
+                </optgroup>
+            </select>
+
+            <label for="bordas">Escolha o recheio borda:</label>
+            <select id="bordas" name="bordas">
+                <option value="" disabled selected>Sem borda recheada</option>
+                <option value="Recheada com Queijo" data-preco="8">Recheada com Queijo - R$ 8</option>
+                <option value="Recheada com Catupiry" data-preco="10">Recheada com Catupiry - R$ 10</option>
+            </select>
+
+            <label for="bebida">Escolha uma bebida:</label>
+            <select id="bebida" name="bebida">
+                <option value="" disabled selected>Sem bebida</option>
+                <option value="Coca-Cola 350ml" data-preco="5">Coca-Cola 350ml - R$ 5</option>
+                <option value="Coca-Cola 600ml" data-preco="7">Coca-Cola 600ml - R$ 7</option>
+                <option value="Coca-Cola 1L" data-preco="10">Coca-Cola 1L - R$ 10</option>
+                <option value="Guaraná 350ml" data-preco="5">Guaraná 350ml - R$ 5</option>
+                <option value="Guaraná 600ml" data-preco="7">Guaraná 600ml - R$ 7</option>
+                <option value="Guaraná 1L" data-preco="10">Guaraná 1L - R$ 10</option>
+                <option value="Fanta 350ml" data-preco="5">Fanta 350ml - R$ 5</option>
+                <option value="Fanta 600ml" data-preco="7">Fanta 600ml - R$ 7</option>
+                <option value="Fanta 1L" data-preco="10">Fanta 1L - R$ 10</option>
+            </select>
+
+            <label for="formaPagamento">Forma de Pagamento:</label>
+            <select id="formaPagamento" name="formaPagamento">
+                <option value="" disabled selected>Selecionar</option>
+                <option value="Pix" data-preco="0">Pix</option>
+                <option value="Dinheiro" data-preco="0">Dinheiro</option>
+                <option value="Cartão de Crédito" data-preco="0">Cartão de Crédito</option>
+                <option value="Cartão de Débito" data-preco="0">Cartão de Débito</option>
+            </select>
+
+            <label for="observacoes">Observações:</label>
+            <textarea id="observacoes" name="observacoes" rows="4" placeholder="Observações adicionais"></textarea>
+
+            <div id="total">Total: R$ 0</div>
+
+            <button type="button" onclick="enviarPedido()">
+                Enviar Pedido
+            </button>
+        </form>
+    </div>
+
+    <script>
+        const tamanhoSelect = document.getElementById('tamanho');
+        const saborSelect = document.getElementById('sabor');
+        const bordasSelect = document.getElementById('bordas');
+        const bebidaSelect = document.getElementById('bebida');
+        const formaPagamentoSelect = document.getElementById('formaPagamento');
+        const totalDiv = document.getElementById('total');
+        const nomeClienteInput = document.getElementById('nomeCliente');
+        const cepInput = document.getElementById('cep');
+        const enderecoInput = document.getElementById('endereco');
+        const numeroInput = document.getElementById('numero');
+        const complementoInput = document.getElementById('complemento');
+        const observacoesInput = document.getElementById('observacoes');
+
+        function calcularTotal() {
+            let total = 0;
+
+            if (tamanhoSelect.selectedOptions[0]) {
+                total += parseFloat(tamanhoSelect.selectedOptions[0].dataset.preco) || 0;
+            }
+
+            if (saborSelect.selectedOptions[0]) {
+                total += parseFloat(saborSelect.selectedOptions[0].dataset.preco) || 0;
+            }
+
+            if (bordasSelect.selectedOptions[0]) {
+                total += parseFloat(bordasSelect.selectedOptions[0].dataset.preco) || 0;
+            }
+
+            if (bebidaSelect.selectedOptions[0]) {
+                total += parseFloat(bebidaSelect.selectedOptions[0].dataset.preco) || 0;
+            }
+
+            // Forma de pagamento não altera o valor total
+            // total += parseFloat(formaPagamentoSelect.selectedOptions[0].dataset.preco) || 0;
+
+            totalDiv.textContent = `Total: R$ ${total.toFixed(2)}`;
+        }
+
+        tamanhoSelect.addEventListener('change', calcularTotal);
+        saborSelect.addEventListener('change', calcularTotal);
+        bordasSelect.addEventListener('change', calcularTotal);
+        bebidaSelect.addEventListener('change', calcularTotal);
+        formaPagamentoSelect.addEventListener('change', calcularTotal);
+
+        function buscarEnderecoPorCep(cep) {
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.erro) {
+                        alert('CEP não encontrado.');
+                        return;
+                    }
+
+                    enderecoInput.value = `${data.logradouro}, ${data.bairro}`;
+                    complementoInput.value = data.complemento;
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar CEP:', error);
+                });
+        }
+
+        cepInput.addEventListener('blur', () => {
+            const cep = cepInput.value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                buscarEnderecoPorCep(cep);
+            }
+        });
+
+        function enviarPedido() {
+            const nomeCliente = nomeClienteInput.value;
+            const cep = cepInput.value;
+            const endereco = enderecoInput.value;
+            const numero = numeroInput.value;
+            const complemento = complementoInput.value;
+            const sabor = saborSelect.value;
+            const tamanho = tamanhoSelect.value;
+            const bordas = bordasSelect.value;
+            const bebida = bebidaSelect.value;
+            const formaPagamento = formaPagamentoSelect.value;
+            const observacoes = observacoesInput.value;
+            const total = totalDiv.textContent.replace('Total: R$ ', '');
+
+            if (!nomeCliente || !cep || !endereco || !numero) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            const mensagem = `Olá, me chamo ${nomeCliente}.\n\n*O meu endereço de entrega é:* ${endereco}, ${numero} ${complemento}, CEP: ${cep}.\n\nEu gostaria de fazer o seguinte pedido de pizza:\n\n` +
+                
+                `Tamanho: ${tamanho}\n` +
+                `Sabor: ${sabor}\n` +
+                `Borda: ${bordas}\n` +
+                `Bebida: ${bebida}\n` +
+                `Forma de Pagamento: ${formaPagamento}\n` +
+                `Observações: ${observacoes}\n\n` +
+                `Total: R$ ${total}`;
+
+            const telefone = '5521982248042';
+
+            const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
